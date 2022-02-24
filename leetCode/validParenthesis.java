@@ -5,15 +5,49 @@ import java.util.Stack;
 
 public class validParenthesis {
     public static boolean isParenthesisValid(String s) {
-        Stack<String> stack = new Stack<>();
-        for (int i=0;i<s.length();i++){
-            if (s.charAt(i) == '['||s.charAt(i) == '{'||s.charAt(i) == '(')
-                stack.push(String.valueOf(s.charAt(i)));
-            else if ((s.charAt(i) == ']' && stack.peek().equals("[")) || (s.charAt(i) == ')' && stack.peek().equals("(")) || (s.charAt(i) == '}' && stack.peek().equals("{")))
-                    stack.pop();
-                else return false;
+        Stack<Character> st = new Stack<>();
+
+        for(int i=0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            if(ch == '(' || ch == '{' || ch == '[')
+            {
+                st.push(ch);
+                continue;
+            }
+            else
+            {
+                if(st.size() == 0)
+                    return false;
+                switch(ch){
+                    case ')' :
+                        if(st.peek() == '(')
+                            st.pop();
+                        else
+                            return false;
+                        break;
+
+                    case ']' :
+                        if(st.peek() == '[')
+                            st.pop();
+                        else
+                            return false;
+                        break;
+
+                    case '}' :
+                        if(st.peek() == '{')
+                            st.pop();
+                        else
+                            return false;
+                        break;
+
+                }
+            }
         }
-        return true;
+        if(st.size() == 0)
+            return true;
+        else
+            return false;
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
