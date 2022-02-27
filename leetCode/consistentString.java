@@ -13,8 +13,10 @@ public class consistentString {
         for (String w:words){
             boolean f = true;
             for (char a:w.toCharArray())
-                if (!set.contains(a))
-                    f=false;
+                if (!set.contains(a)) {
+                    f = false;
+                    break;
+                }
             if (f)
                 n++;
         }
