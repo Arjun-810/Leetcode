@@ -6,9 +6,7 @@ class Solution {
         char[] to_swap = new char[2];
         int[] index = new int[2];
         for (int i=0;i<n;i++){
-            char c1 = s1.charAt(i);
-            char c2 = s2.charAt(i);
-            if (!(String.valueOf(c1).equals(String.valueOf(c2)))) {
+            if (s1.charAt(i) != s2.charAt(i)) {
                 if (k < 2) {
                     to_swap[k] = s1.charAt(i);
                     index[k] = i;
