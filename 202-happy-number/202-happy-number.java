@@ -1,21 +1,20 @@
 class Solution {
     public boolean isHappy(int n) {
-        Set<Integer> set = new HashSet<>();
-        boolean x = true;
-        int sum=0;
-        while (x){
+        boolean is_loop = true;
+        int sum = 0;
+        if (n==1||n==7)return true;
+        while (is_loop){
             sum = 0;
             while (n>0){
                 sum += Math.pow(n%10,2);
                 n/=10;
             }
-            System.out.println(sum);
-            if (sum == 1||sum==7) return true;
-            if (set.contains(sum))return false;
-            else {
-                set.add(sum);
+            if (sum<=9){
+                if (sum==1||sum==7)return true;
+                else return false;
+            }else {
+                is_loop = true;
                 n = sum;
-                x = true;
             }
         }
         return false;
