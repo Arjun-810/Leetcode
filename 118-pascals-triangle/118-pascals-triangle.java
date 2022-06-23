@@ -1,17 +1,14 @@
 class Solution {
-    public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> list = new ArrayList<>();
-        for (int i=1;i<=numRows;i++){
-            List<Integer> li = new ArrayList<>();
-            for (int j=1;j<=i;j++){
-                if (i==1) li.add(1);
-                else if (i>1){
-                    if (j==1 || j==i) li.add(1);
-                    else li.add(list.get(i - 2).get(j - 2) + list.get(i - 2).get(j-1));
-                }
+    public List<List<Integer>> generate(int n) {
+        List<List<Integer>> pas = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 1; j <= i ; j++) {
+                if (j == 1 || j == i) temp.add(1);
+                else temp.add(pas.get(i-2).get(j-2)+pas.get(i-2).get(j-1));
             }
-            list.add(li);
+            pas.add(temp);
         }
-        return list;
+        return pas;
     }
 }
