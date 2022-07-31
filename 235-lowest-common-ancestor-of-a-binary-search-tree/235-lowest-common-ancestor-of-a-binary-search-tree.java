@@ -16,18 +16,12 @@ class Solution {
             common = root;
             return;
         }
-        if(root.val < p.val && root.val < q.val){
-            common = root;
-            com(root.right,p,q);
-        }
-        else if(root.val >= p.val && root.val >= q.val){
-            common = root;
-            com(root.left,p,q);
-        }
+        if(root.val < p.val && root.val < q.val) com(root.right,p,q);
+        else if(root.val >= p.val && root.val >= q.val) com(root.left,p,q);
         else{ 
             common  = root;
             return;
-             }
+        }
         
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
