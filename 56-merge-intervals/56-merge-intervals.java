@@ -10,7 +10,6 @@ class Solution {
             }
             else if(end-intervals[i][0]>=0){ 
                 end = Math.max(intervals[i][1],end);
-                start = Math.min(start, intervals[i][0]);
             }
             else{
                 int[] temp = {start,end};
