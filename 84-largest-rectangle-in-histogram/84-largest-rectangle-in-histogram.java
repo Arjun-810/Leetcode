@@ -1,38 +1,28 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
-      int area=0;
-        
-        Stack<Pair<Integer,Integer>> stack=new Stack<>();
-        
-        int top=-1;
+        int ans = Integer.MIN_VALUE;
+        int[] left_smallest = new int[heights.length];
+        Stack<Integer> stack = new Stack<>();
+        for(int i=0;i<heights.length;i++){
+            while(!stack.isEmpty() && heights[i] <= heights[stack.peek()])
+                stack.pop();
+            if(stack.isEmpty()) left_smallest[i] = 0;
+            else left_smallest[i] = stack.peek()+1;
+            stack.push(i);
+        }
+        stack.clear();
+        int[] right_smallest = new int[heights.length];
+        for(int i=heights.length-1;i>=0;i--){
+            while(!stack.isEmpty() && heights[i] <= heights[stack.peek()])
+                stack.pop();
+            if(stack.isEmpty()) right_smallest[i] = heights.length-1;
+            else right_smallest[i] = stack.peek()-1;
+            stack.push(i);
+        }
         
         for(int i=0;i<heights.length;i++){
-            
-            int start=i;
-            
-            while(!stack.isEmpty() && stack.peek().getValue()>heights[i]){
-                
-               Pair p=stack.pop();
-                int index=(int)p.getKey();
-                int height=(int)p.getValue();
-               area=Math.max(area,height*(i-index));
-               start=index;
-                
-            }
-            Pair p=new Pair(start,heights[i]);
-            stack.push(p);
-            
+            ans = Math.max(ans,heights[i]*(right_smallest[i]-left_smallest[i]+1));    
         }
-        
-        while(stack.size()>0){
-            
-                Pair p=stack.pop();
-                int index=(int)p.getKey();
-                int height=(int)p.getValue();
-            
-                area=Math.max(area,height*(heights.length-index));
-        }
-        
-        return area;
+        return ans;
     }
 }
