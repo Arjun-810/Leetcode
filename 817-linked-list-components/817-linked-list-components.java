@@ -10,14 +10,14 @@
  */
 class Solution {
     public int numComponents(ListNode head, int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> map = new HashSet<>();
         for(int i=0;i<nums.length;i++)
-            map.put(nums[i], i);
+            map.add(nums[i]);
         ListNode root = head;
         int max = Integer.MIN_VALUE, c = 0;
         boolean prevCon = false;
         while(root != null){
-            if(map.containsKey(root.val)){
+            if(map.contains(root.val)){
                 if(!prevCon){
                     c++;
                     prevCon = true;
