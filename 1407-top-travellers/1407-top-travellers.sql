@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT name, coalesce(t2.travelled_distance,0) as travelled_distance from Users t1 LEFT JOIN (SELECT user_id, sum(distance) as travelled_distance from rides group by user_id) t2 ON t1.id = t2.user_id order by 2 desc, 1 asc;
