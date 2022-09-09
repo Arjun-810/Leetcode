@@ -1,21 +1,19 @@
 class Solution {
-    
-    public int find(int idx,int[] nums,int[] dp){
-        if(idx >= nums.length)
-            return 0;
+    public int rob(int[] houses) {
+        int n = houses.length;
+        int[] arr = new int[n];
+        if(n == 2)
+            return Math.max(houses[0],houses[1]);
+        if(n == 1)
+            return houses[0];
         
-        if(dp[idx] != -1)
-            return dp[idx];
-        
-        int a = find(idx+1,nums,dp);
-        int b = find(idx+2,nums,dp)+nums[idx];
-        
-        return dp[idx] = Math.max(a,b);
-    }
-    
-    public int rob(int[] nums) {
-        int[] dp = new int[nums.length+1];
-        Arrays.fill(dp,-1);
-        return Math.max(find(0,nums,dp),find(1,nums,dp));
+        arr[0] = houses[0];
+        arr[1] = houses[1];
+        int max = arr[0];
+        for(int i=2;i<n;i++){
+            arr[i] = max+houses[i];
+            max = Math.max(arr[i-1],max);
+        }
+        return Math.max(arr[n-1],arr[n-2]);
     }
 }
